@@ -1,10 +1,14 @@
-export default function UserProfile({ firstName, lastName, age }) {
+import { useUser } from "./UserContext";
+
+export default function UserProfile() {
+  const { user } = useUser();
+
   return (
     <div>
-      <h1>{firstName}</h1>
-      <h2>{lastName}</h2>
+      <h1>{user?.firstName}</h1>
+      <h2>{user?.lastName}</h2>
 
-      <p>Age: {age}</p>
+      <p>Age: {user?.age}</p>
     </div>
   );
 }
