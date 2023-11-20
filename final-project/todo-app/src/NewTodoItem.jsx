@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useTodoContext } from "./TodoContext";
 
 export function NewTodoItem() {
   const [todoText, setTodoText] = useState("");
+  const todoCtx = useTodoContext();
 
   const onTextChange = (event) => {
     setTodoText(event.target.value);
   };
 
   const onAddClick = () => {
-    // TODO
+    todoCtx.addTodoItem({ id: Math.random(), text: todoText, done: false });
   };
 
   return (

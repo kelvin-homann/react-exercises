@@ -1,18 +1,17 @@
-import "./TodoItemList.css";
 import { TodoItem } from "./TodoItem";
+import { observer } from "mobx-react-lite";
+import { useTodoContext } from "./TodoContext";
 
-export function TodoItemList() {
-  const dummyTodos = [
-    { id: 1, done: false, text: "Dummy 1" },
-    { id: 2, done: false, text: "Dummy 2" },
-    { id: 3, done: false, text: "Dummy 3" },
-  ];
+import "./TodoItemList.css";
+
+export const TodoItemList = observer(() => {
+  const todoCtx = useTodoContext();
 
   return (
     <>
-      {dummyTodos.map((todo) => (
+      {todoCtx.todos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
     </>
   );
-}
+});

@@ -1,16 +1,12 @@
 import { useState } from "react";
+import { observer } from "mobx-react-lite";
 import "./TodoItem.css";
 
-export function TodoItem({ todo }) {
+export const TodoItem = observer(({ todo }) => {
   const [todoItem, setTodoItem] = useState(todo);
 
   const onDoneChange = (event) => {
     const newTodoItem = { ...todoItem, done: event.target.checked };
-    setTodoItem(newTodoItem);
-  };
-
-  const onTextChange = (event) => {
-    const newTodoItem = { ...todoItem, text: event.target.value };
     setTodoItem(newTodoItem);
   };
 
@@ -21,11 +17,10 @@ export function TodoItem({ todo }) {
   return (
     <form>
       <input type="checkbox" checked={todoItem.done} onChange={onDoneChange} />
-      {/* <input type="text" value={todoItem.text} onChange={onTextChange} /> */}
       {todoItem.text}
       <button type="button" onClick={onDeleteClick}>
         Löschen
       </button>
     </form>
   );
-}
+});
