@@ -1,10 +1,14 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 class ItemStore {
   items = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      items: observable,
+      addItem: action,
+      removeItem: action,
+    });
   }
 
   addItem(item) {
