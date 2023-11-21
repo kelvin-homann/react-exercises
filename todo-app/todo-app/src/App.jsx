@@ -8,9 +8,11 @@ import { TodoProvider } from "./TodoContext";
 function App() {
   return (
     <TodoProvider>
-      <h1>Meine TODOs</h1>
-      <NewTodoItem />
-      <TodoItemList />
+      <div className="container">
+        <h1>Meine TODOs</h1>
+        <NewTodoItem />
+        <TodoItemList />
+      </div>
     </TodoProvider>
   );
 }
