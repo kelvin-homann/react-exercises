@@ -39,7 +39,7 @@ app.get("/todos", (req, res) => {
       return;
     }
 
-    res.json(rows);
+    res.json(rows.map((row) => ({ ...row, completed: !!row.completed })));
   });
 });
 
@@ -53,24 +53,28 @@ app.get("/todos/:id", (req, res) => {
       return;
     }
 
+    row.completed = !!row.completed;
+
     res.json(row);
   });
 });
 
 // Create a new todo
 app.post("/todos", (req, res) => {
+  console.log(req.body);
+
   const { task, completed, due_date, tags } = req.body;
 
   database.run(
     "INSERT INTO todos (task, completed, due_date, tags) VALUES (?, ?, ?, ?)",
-    [task, completed, due_date, tags],
+    [task, false, due_date, tags],
     function (err) {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
 
-      res.json({ id: this.lastID });
+      res.json({ id: this.lastID, text: task, completed: false });
     }
   );
 });

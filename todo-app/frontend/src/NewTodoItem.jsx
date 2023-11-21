@@ -9,17 +9,17 @@ export function NewTodoItem() {
     setTodoText(event.target.value);
   };
 
-  const onAddClick = () => {
-    todoCtx.addTodoItem({ id: Math.random(), text: todoText, done: false });
+  const onAddClick = (e) => {
+    e.preventDefault();
+
+    todoCtx.addTodoItem({ text: todoText, done: false });
   };
 
   return (
-    <>
+    <form onSubmit={onAddClick}>
       <h4>Neues TODO</h4>
       <input type="text" value={todoText} onChange={onTextChange} />
-      <button type="button" onClick={onAddClick}>
-        Hinzufügen
-      </button>
-    </>
+      <button type="submit">Hinzufügen</button>
+    </form>
   );
 }

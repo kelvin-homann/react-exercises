@@ -1,26 +1,28 @@
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import "./TodoItem.css";
+import { useTodoContext } from "./TodoContext";
 
-export const TodoItem = observer(({ todo }) => {
-  const [todoItem, setTodoItem] = useState(todo);
+export const TodoItem = observer(({ todoItem }) => {
+  const { removeTodoItem, updateTodoItem } = useTodoContext();
 
   const onDoneChange = (event) => {
     const newTodoItem = { ...todoItem, done: event.target.checked };
-    setTodoItem(newTodoItem);
+
+    updateTodoItem(newTodoItem);
   };
 
   const onDeleteClick = () => {
-    // TODO
+    removeTodoItem(todoItem);
   };
 
   return (
-    <form>
+    <div>
       <input type="checkbox" checked={todoItem.done} onChange={onDoneChange} />
-      {todoItem.text}
+      {todoItem.task}
       <button type="button" onClick={onDeleteClick}>
         Löschen
       </button>
-    </form>
+    </div>
   );
 });

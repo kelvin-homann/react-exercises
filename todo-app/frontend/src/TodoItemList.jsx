@@ -10,7 +10,7 @@ export const TodoItemList = observer(() => {
   return (
     <>
       {todoCtx.todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todoItem={todo} />
       ))}
     </>
   );
