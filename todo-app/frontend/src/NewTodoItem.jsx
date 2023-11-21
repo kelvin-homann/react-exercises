@@ -20,7 +20,7 @@ export function NewTodoItem() {
   return (
     <form onSubmit={onAddClick}>
       <h4>Neues TODO</h4>
-      <input type="text" value={todoText} onChange={onTextChange} />
+      <input type="text" value={todoText} onChange={onTextChange} required />
       <button type="submit">Hinzufügen</button>
     </form>
   );
