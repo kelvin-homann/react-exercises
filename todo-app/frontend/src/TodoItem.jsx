@@ -17,14 +17,21 @@ export const TodoItem = observer(({ todoItem }) => {
   };
 
   return (
-    <div>
-      <input
-        type="checkbox"
-        checked={todoItem.completed}
-        onChange={onDoneChange}
-      />
-      {todoItem.text}
-      <button type="button" onClick={onDeleteClick}>
+    <div className="row mt-3">
+      <div className="col-sm-1">
+        <input
+          type="checkbox"
+          checked={todoItem.completed}
+          onChange={onDoneChange}
+          className="form-check-input"
+        />
+      </div>
+      <p className="col-sm-9">{todoItem.text}</p>
+      <button
+        className="btn btn-secondary col-sm-2"
+        type="button"
+        onClick={onDeleteClick}
+      >
         Löschen
       </button>
     </div>

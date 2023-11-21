@@ -20,8 +20,22 @@ export function NewTodoItem() {
   return (
     <form onSubmit={onAddClick}>
       <h4>Neues TODO</h4>
-      <input type="text" value={todoText} onChange={onTextChange} required />
-      <button type="submit">Hinzufügen</button>
+      <div className="row pb-8">
+        <div className="col-sm-8">
+          <input
+            type="text"
+            value={todoText}
+            onChange={onTextChange}
+            required
+            className="form-control"
+          />
+        </div>
+        <div className="col-sm-4">
+          <button type="submit" className="btn btn-primary">
+            Hinzufügen
+          </button>
+        </div>
+      </div>
     </form>
   );
 }
