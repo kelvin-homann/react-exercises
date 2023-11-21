@@ -12,7 +12,9 @@ export function NewTodoItem() {
   const onAddClick = (e) => {
     e.preventDefault();
 
-    todoCtx.addTodoItem({ text: todoText, done: false });
+    todoCtx.addTodoItem({ text: todoText, completed: false });
+
+    setTodoText("");
   };
 
   return (

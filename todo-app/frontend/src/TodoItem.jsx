@@ -7,7 +7,7 @@ export const TodoItem = observer(({ todoItem }) => {
   const { removeTodoItem, updateTodoItem } = useTodoContext();
 
   const onDoneChange = (event) => {
-    const newTodoItem = { ...todoItem, done: event.target.checked };
+    const newTodoItem = { ...todoItem, completed: event.target.checked };
 
     updateTodoItem(newTodoItem);
   };
@@ -18,8 +18,12 @@ export const TodoItem = observer(({ todoItem }) => {
 
   return (
     <div>
-      <input type="checkbox" checked={todoItem.done} onChange={onDoneChange} />
-      {todoItem.task}
+      <input
+        type="checkbox"
+        checked={todoItem.completed}
+        onChange={onDoneChange}
+      />
+      {todoItem.text}
       <button type="button" onClick={onDeleteClick}>
         Löschen
       </button>

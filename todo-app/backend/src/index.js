@@ -10,7 +10,7 @@ const database = new sqlite3.Database("todos.db");
 
 database.serialize(() => {
   database.run(
-    "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT, task TEXT, completed INTEGER, due_date TEXT, tags TEXT)"
+    "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, completed INTEGER, due_date TEXT, tags TEXT)"
   );
 });
 
@@ -61,20 +61,18 @@ app.get("/todos/:id", (req, res) => {
 
 // Create a new todo
 app.post("/todos", (req, res) => {
-  console.log(req.body);
-
-  const { task, completed, due_date, tags } = req.body;
+  const { text, completed, due_date, tags } = req.body;
 
   database.run(
-    "INSERT INTO todos (task, completed, due_date, tags) VALUES (?, ?, ?, ?)",
-    [task, false, due_date, tags],
+    "INSERT INTO todos (text, completed, due_date, tags) VALUES (?, ?, ?, ?)",
+    [text, false, due_date, tags],
     function (err) {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
 
-      res.json({ id: this.lastID, text: task, completed: false });
+      res.json({ id: this.lastID, text: text, completed: false });
     }
   );
 });
@@ -82,18 +80,18 @@ app.post("/todos", (req, res) => {
 // Update a todo
 app.put("/todos/:id", (req, res) => {
   const id = req.params.id;
-  const { task, completed, due_date, tags } = req.body;
+  const { text, completed, due_date, tags } = req.body;
 
   database.run(
-    "UPDATE todos SET task = ?, completed = ?, due_date = ?, tags = ? WHERE id = ?",
-    [task, completed, due_date, tags, id],
+    "UPDATE todos SET text = ?, completed = ?, due_date = ?, tags = ? WHERE id = ?",
+    [text, completed, due_date, tags, id],
     (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
 
-      res.json({ message: "Todo updated successfully" });
+      res.json({ id: id, text: text, completed: completed });
     }
   );
 });

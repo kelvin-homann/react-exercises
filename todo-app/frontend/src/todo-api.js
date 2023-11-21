@@ -8,11 +8,11 @@ export class TodoApi {
     return response.json();
   }
 
-  async createTask(task) {
+  async createTask(todoItem) {
     const response = await fetch(`${this.url}/todos`, {
       method: "POST",
       body: JSON.stringify({
-        task: task.text,
+        text: todoItem.text,
         completed: false,
       }),
       headers: {
@@ -22,10 +22,10 @@ export class TodoApi {
     return response.json();
   }
 
-  async updateTask(task) {
-    const response = await fetch(`${this.url}/todos/${task.id}`, {
+  async updateTask(todoItem) {
+    const response = await fetch(`${this.url}/todos/${todoItem.id}`, {
       method: "PUT",
-      body: JSON.stringify(task),
+      body: JSON.stringify(todoItem),
       headers: {
         "Content-Type": "application/json",
       },
@@ -33,8 +33,8 @@ export class TodoApi {
     return response.json();
   }
 
-  async deleteTask(task) {
-    const response = await fetch(`${this.url}/todos/${task.id}`, {
+  async deleteTask(todoItem) {
+    const response = await fetch(`${this.url}/todos/${todoItem.id}`, {
       method: "DELETE",
     });
     return response.json();

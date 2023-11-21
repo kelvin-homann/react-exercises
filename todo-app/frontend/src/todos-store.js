@@ -8,6 +8,7 @@ export class TodoItemsStore {
       items: observable,
       addItem: action,
       removeItem: action,
+      updateItem: action,
     });
 
     this.items.replace(initialItems);
@@ -18,16 +19,19 @@ export class TodoItemsStore {
   }
 
   updateItem(item) {
-    const index = this.items.findIndex((i) => i.id === item.id);
+    const index = this.items.findIndex((i) => {
+      return String(i.id) === String(item.id);
+    });
 
     if (index !== -1) {
-      this.items[index] = item;
+      const itemsCopy = [...this.items];
+      itemsCopy[index] = item;
+
+      this.items.replace(itemsCopy);
     }
   }
 
   removeItem(item) {
-    console.log(item);
-
     this.items.replace(this.items.filter((i) => i.id !== item.id));
   }
 }
