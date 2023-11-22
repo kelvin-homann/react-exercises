@@ -10,7 +10,7 @@ export function ShoppingCartList() {
         {shoppingCartContext.shoppingCart.map((item) => (
           <li key={Math.random()}>
             <button onClick={() => shoppingCartContext.removeItem(item)}>
-              {item}
+              {item.text}
             </button>
           </li>
         ))}

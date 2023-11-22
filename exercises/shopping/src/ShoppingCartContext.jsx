@@ -10,11 +10,13 @@ export const ShoppingCartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
 
   const addItem = (item) => {
+    item.id = Math.random();
+
     setItems([...items, item]);
   };
 
   const removeItem = (item) => {
-    setItems(items.filter((i) => i !== item));
+    setItems(items.filter((i) => i.id !== item.id));
   };
 
   // const countedItems = items.reduce((acc, item) => {

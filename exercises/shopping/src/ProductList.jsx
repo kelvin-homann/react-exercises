@@ -3,7 +3,11 @@ import { useShoppingCart } from "./ShoppingCartContext";
 export function ProductList() {
   const shoppingCartContext = useShoppingCart();
 
-  const dummyProducts = ["apple", "orange", "banana"];
+  const dummyProducts = [
+    { text: "apple" },
+    { text: "orange" },
+    { text: "banana" },
+  ];
 
   return (
     <>
@@ -12,7 +16,7 @@ export function ProductList() {
         {dummyProducts.map((item) => (
           <li key={Math.random()}>
             <button onClick={() => shoppingCartContext.addItem(item)}>
-              {item}
+              {item.text}
             </button>
           </li>
         ))}
